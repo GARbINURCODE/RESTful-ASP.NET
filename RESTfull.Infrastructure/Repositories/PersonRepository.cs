@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RESTfull.Domain.Models;
 using RESTfull.Infrastructure.Data;
 
@@ -12,22 +6,16 @@ namespace RESTfull.Infrastructure.Repositories
 {
     public class PersonRepository : BaseRepository<Person> // Репозиторий для класса Person
     {
-        private readonly Context _context; // Поле используемого класса Context
-        private readonly ProductRepository<Product> _productRepository;
         public Context UnitOfWork // Метод для получения текущего Context`а
         {
-            get { return _context; }
+            get { return Context; }
         }
 
-        public PersonRepository(Context context) : base(context) // Конструктор с параметром объекта Context`а
-        {
-            _context = context;
-            _productRepository = new ProductRepository<Product>(_context);
-        }
+        public PersonRepository(Context context) : base(context) { } // Конструктор с параметром объекта Context`а
 
         public async new Task<List<Person>> GetAllAsync()
         {
-            return await _context.Persons
+            return await Context.Persons
                 .OrderBy(p => p.Name)
                 .Include(p => p.Orders)
                 .ToListAsync();
@@ -35,7 +23,7 @@ namespace RESTfull.Infrastructure.Repositories
 
         public async new Task<Person?> GetByIdAsync(Guid id) // Метод для получения персоны по Id 
         {
-            return await _context.Persons
+            return await Context.Persons
                 .Where(prop => prop.Id == id)
                 .Include(p => p.Orders)
                 .FirstOrDefaultAsync();
@@ -43,7 +31,7 @@ namespace RESTfull.Infrastructure.Repositories
 
         public async Task<Person?> GetByNameAsync(string name) // Метод для получения персоны по имени
         {
-            return await _context.Persons
+            return await Context.Persons
                 .Where(prop => prop.Name == name)
                 .Include(p => p.Orders)
                 .FirstOrDefaultAsync();
@@ -51,26 +39,26 @@ namespace RESTfull.Infrastructure.Repositories
 
         public async Task DeleteAsync(Guid id) // Метод для удаления персоны по Id
         {
-            Person? person = await _context.Persons.FindAsync(id);
+            Person? person = await GetByIdAsync(id);
             if (person != null)
             {
                 foreach(Product product in person.Orders)
                 {
-                    await _productRepository.DeleteAsync(product.Id);
+                    Context.Set<Product>().Remove(product);
                 }
-                _context.Persons.Remove(person);
-                await _context.SaveChangesAsync();
+                Context.Persons.Remove(person);
+                await Context.SaveChangesAsync();
             }
         }
 
-        public void ChangeTrackerClear() { _context.ChangeTracker.Clear(); }
+        public void ChangeTrackerClear() { Context.ChangeTracker.Clear(); }
 
         public async new Task UpdateAsync(Person person) // Асинхронный метод для обновления данных о персоне
         {
-            var existPerson = await _context.Persons.FindAsync(person.Id);
+            var existPerson = await Context.Persons.FindAsync(person.Id);
             if (existPerson != null)
             {
-                _context.Entry(existPerson).CurrentValues.SetValues(person);
+                Context.Entry(existPerson).CurrentValues.SetValues(person);
                 foreach (var product in person.Orders)
                 {
                     var existProduct =
@@ -78,21 +66,22 @@ namespace RESTfull.Infrastructure.Repositories
                     if (existProduct == null)
                     {
                         existPerson.Orders.Add(product);
+                        await Context.Set<Product>().AddAsync(product);
                     }
                     else
                     {
-                        _context.Entry(existProduct).CurrentValues.SetValues(product);
+                        Context.Entry(existProduct).CurrentValues.SetValues(product);
                     }
                 }
                 foreach (var existProduct in existPerson.Orders)
                 {
                     if (!person.Orders.Any(pr => pr.Id == existProduct.Id))
                     {
-                        _context.Remove(existProduct);
+                        Context.Remove(existProduct);
                     }
                 }
             }
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
     }

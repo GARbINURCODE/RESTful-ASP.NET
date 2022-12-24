@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RESTfull.Domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:63443;http://localhost:63444"
+    }
+  }
+}

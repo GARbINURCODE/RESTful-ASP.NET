@@ -17,11 +17,9 @@ namespace RESTfull.API.Controllers
     public class PersonController : ControllerBase
     {
         private readonly PersonRepository Repository;
-        private readonly ProductRepository<Product> ProductRepository;
         public PersonController(Context context) 
         {  
             Repository = new PersonRepository(context);
-            ProductRepository = new ProductRepository<Product>(context);
         }
 
         [HttpGet]
@@ -41,9 +39,8 @@ namespace RESTfull.API.Controllers
             else
             {
                 PersonDTO persondto = new PersonDTO(person);
-                List<Product> products = await ProductRepository.GetByPersonAsync(person);
                 List<ProductDTO> result = new List<ProductDTO>();
-                foreach (Product product in products) { result.Add(new ProductDTO(product)); }
+                foreach (Product product in person.Orders) { result.Add(new ProductDTO(product)); }
                 return Ok(result);
             }
 

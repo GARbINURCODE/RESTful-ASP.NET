@@ -11,12 +11,10 @@ namespace RESTfull.API.Controllers
     public class IPadController : ControllerBase, IMainController
     {
         private readonly ProductRepository<IPad> Repository;
-        private readonly PersonRepository PersonRepository;
 
         public IPadController(Context context)
         {
             Repository = new ProductRepository<IPad>(context);
-            PersonRepository = new PersonRepository(context);
         }
 
         [HttpGet]
@@ -43,11 +41,10 @@ namespace RESTfull.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(ProductDTO newipad)
         {
-            var person = await PersonRepository.GetByIdAsync(newipad.PersonId);
             IPad ipad = new()
             {
                 Id = Guid.NewGuid(),
-                Person = person,
+                Person = null,
                 Model = newipad.Model,
                 Color = newipad.Color,
                 Processor = newipad.Processor,
@@ -55,7 +52,7 @@ namespace RESTfull.API.Controllers
                 Storage = newipad.Storage,
                 Status = true
             };
-            await Repository.CreateAsync(ipad);
+            await Repository.CreateAsync(ipad, newipad.PersonId);
             return Ok(newipad);
         }
 

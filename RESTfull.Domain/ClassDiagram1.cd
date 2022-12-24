@@ -1,32 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="RESTfull.Domain.Product">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+  <Class Name="RESTfull.Domain.Models.BaseModel">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAEAgA=</HashCode>
-      <FileName>Product.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BaseModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="RESTfull.Domain.IPad" Collapsed="true">
-    <Position X="2.75" Y="3.75" Width="1.5" />
+  <Class Name="RESTfull.Domain.Models.Person">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEAAAAAACAAAAAAAAAAAAQABAAAACAACAAAIAAAAAA=</HashCode>
+      <FileName>Models\Person.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RESTfull.Domain.Models.Products.IPad" Collapsed="true">
+    <Position X="5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IPad.cs</FileName>
+      <FileName>Models\Products\IPad.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="RESTfull.Domain.IPhone" Collapsed="true">
-    <Position X="5" Y="3.75" Width="1.5" />
+  <Class Name="RESTfull.Domain.Models.Products.IPhone" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IPhone.cs</FileName>
+      <FileName>Models\Products\IPhone.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="RESTfull.Domain.MacBook" Collapsed="true">
-    <Position X="7.5" Y="3.75" Width="1.5" />
+  <Class Name="RESTfull.Domain.Models.Products.MacBook" Collapsed="true">
+    <Position X="10.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MacBook.cs</FileName>
+      <FileName>Models\Products\MacBook.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="RESTfull.Domain.Models.Product">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAEAgA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Person" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -11,5 +11,6 @@ namespace RESTfull.Domain.Models
         public byte RAM { get; set; }
         public ushort Storage { get; set; }
         public bool Status { get; set; }
+
     }
 }

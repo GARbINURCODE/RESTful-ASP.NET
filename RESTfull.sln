@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTfull.Domain", "RESTfull
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTfull.Infrastructure", "RESTfull.Infrastructure\RESTfull.Infrastructure.csproj", "{AD392D28-A942-483A-9FE5-6BBC0BA21BF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{11F7DD7B-4E3B-4053-92DF-66E604329B5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{99A368F0-CAF8-4B42-B4D3-C0935A52F092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{AD392D28-A942-483A-9FE5-6BBC0BA21BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD392D28-A942-483A-9FE5-6BBC0BA21BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD392D28-A942-483A-9FE5-6BBC0BA21BF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11F7DD7B-4E3B-4053-92DF-66E604329B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11F7DD7B-4E3B-4053-92DF-66E604329B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11F7DD7B-4E3B-4053-92DF-66E604329B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11F7DD7B-4E3B-4053-92DF-66E604329B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A368F0-CAF8-4B42-B4D3-C0935A52F092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A368F0-CAF8-4B42-B4D3-C0935A52F092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A368F0-CAF8-4B42-B4D3-C0935A52F092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A368F0-CAF8-4B42-B4D3-C0935A52F092}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

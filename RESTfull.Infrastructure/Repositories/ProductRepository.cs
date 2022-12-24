@@ -8,7 +8,7 @@ namespace RESTfull.Infrastructure.Repositories
 {
     public class ProductRepository<TProductModel>  : BaseRepository<TProductModel> where TProductModel : Product
     {
-        private PersonRepository PersonRepository { get; set; }
+        private readonly PersonRepository PersonRepository;
         public ProductRepository(Context context) : base(context)
         {
             PersonRepository = new PersonRepository(context);
@@ -32,15 +32,16 @@ namespace RESTfull.Infrastructure.Repositories
         public async Task<List<TProductModel>> GetByPersonAsync(Person person)
         {
             return await Context.Set<TProductModel>()
-                .Where(m => m.Person.Id == person.Id)
+                .Where(m => m.Person!.Id == person.Id)
                 .ToListAsync();
         }
 
-        public async new Task<TProductModel?> CreateAsync(TProductModel product)
+        public async Task<TProductModel?> CreateAsync(TProductModel product, Guid personid)
         {
-            var person = await PersonRepository.GetByIdAsync(product.Person!.Id);
+            var person = await PersonRepository.GetByIdAsync(personid);
             if (person != null)
             {
+                product.Person = person;
                 person.Orders.Add(product);
                 await Context.Set<TProductModel>().AddAsync(product);
                 await PersonRepository.UpdateAsync(person);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RESTfull.Domain.Models;
 using RESTfull.Infrastructure.Data;
 
@@ -11,7 +6,7 @@ namespace RESTfull.Infrastructure.Repositories
 {
     public class BaseRepository<TDbModel> : IBaseRepository<TDbModel> where TDbModel : BaseModel
     {
-        private protected Context Context { get; set; }
+        private protected readonly Context Context;
 
         public BaseRepository(Context context) { Context = context; }
 

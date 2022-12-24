@@ -21,8 +21,8 @@ namespace RESTfull.Infrastructure.Repositories
 
         public PersonRepository(Context context) : base(context) // Конструктор с параметром объекта Context`а
         {
-            // То, что в методе, это обработка исключений?
             _context = context;
+            _productRepository = new ProductRepository<Product>(_context);
         }
 
         public async new Task<List<Person>> GetAllAsync()

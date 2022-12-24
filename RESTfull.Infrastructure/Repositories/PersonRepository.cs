@@ -13,6 +13,7 @@ namespace RESTfull.Infrastructure.Repositories
     public class PersonRepository : BaseRepository<Person> // Репозиторий для класса Person
     {
         private readonly Context _context; // Поле используемого класса Context
+        private readonly ProductRepository<Product> _productRepository;
         public Context UnitOfWork // Метод для получения текущего Context`а
         {
             get { return _context; }
@@ -53,7 +54,11 @@ namespace RESTfull.Infrastructure.Repositories
             Person? person = await _context.Persons.FindAsync(id);
             if (person != null)
             {
-                _context.Remove(person);
+                foreach(Product product in person.Orders)
+                {
+                    await _productRepository.DeleteAsync(product.Id);
+                }
+                _context.Persons.Remove(person);
                 await _context.SaveChangesAsync();
             }
         }
